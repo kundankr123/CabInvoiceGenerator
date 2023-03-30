@@ -28,16 +28,29 @@
                 for (int j = 1; j <= numRides; j++)
                 {
                     Console.WriteLine("Ride " + j);
-                    Console.WriteLine("Enter the distance travelled in km: ");
+                    Console.WriteLine("Enter the distance travelled (in km): ");
                     distance = Convert.ToDouble(Console.ReadLine());
 
-                    Console.WriteLine("Enter the time taken in minutes: ");
+                    Console.WriteLine("Enter the time taken (in minutes): ");
                     time = Convert.ToDouble(Console.ReadLine());
 
-                    users[userId].Rides.Add(new Ride(distance, time));
+                    Console.WriteLine("Enter the type of ride 1 for normal, 2 for premium: ");
+                    int rideType = Convert.ToInt32(Console.ReadLine());
+
+                    if (rideType == 1)
+                    {
+                        users[userId].Rides.Add(new NormalRide(distance, time));
+                    }
+                    else if (rideType == 2)
+                    {
+                        users[userId].Rides.Add(new PremiumRide(distance, time));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid ride type. Skipping ride...");
+                    }
                 }
             }
-
             Console.WriteLine("Enter a user ID to generate the invoice: ");
             userId = Convert.ToInt32(Console.ReadLine());
 
